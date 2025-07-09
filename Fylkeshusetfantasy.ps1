@@ -1,23 +1,32 @@
 $Maincharacter = [PSCustomObject]@{
-    Name     =
-
-
-    HP       = '52'
-    Strenght = '14'
-    Armour   = '10'
+    Hp       = 52
+    Strenght = 14
+    Armour   = 10
 }
-$Bruker = Read-Host "Hva er namnet ditt?"
+$slemming =[PSCustomObject]@{
+    Name = 'Slemkar'
+    Hp = 56
+}
+$Bruker = Read-Host "Hvem er du?"
     Write-Host "Velkommen til dette spillet" $bruker
 Function Get-Formula {
-    $hp - $damage * $dmgmodifier 
+    $currenthp - $damage #* $dmgmodifier * $defencemodifier
 }
 
 
 $state = "True"
     While ($state -match "True"){
-        $brukerinput = Read-Host"gjør et angrep"
-        Switch($brukerinput)
-        Angrep{
-            
+        $Action = Read-Host "gjør et angrep"
+        Switch($action){
+            Angrep{
+            $result = Get-Formula -currenthp $slemming.Hp -damage $Maincharacter.Strenght
+            Write-Host $result
+            }
+            Quit{
+            $state = "false"   
+            }
+            Test{
+            $slemming.Hp - $Maincharacter.Strenght
+            }
         }
     }   
